@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         private double result = 0;
+        private bool more = false;
         private string operation = "";
         private bool isNewNumber = true;
         public MainWindow()
@@ -37,12 +38,21 @@ namespace WpfApp1
         }
         private void Operator_Click(object sender, RoutedEventArgs e)
         {
+            if (more == true)
+            {
+                Equals();
+            }
             Button button = (Button)sender;
             operation = button.Content.ToString();
             result = double.Parse(txtInput.Text);
+            more = true;
             isNewNumber = true;
         }
         private void Equals_Click(object sender, RoutedEventArgs e)
+        {
+            Equals();
+        }
+        private void Equals()
         {
             if (double.TryParse(txtInput.Text, out double number))
             {
